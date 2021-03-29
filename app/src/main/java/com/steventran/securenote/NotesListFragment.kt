@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
-private const val SELECTION_ID = "selectionString"
 class NotesListFragment : Fragment() {
 
     interface Callback {
@@ -33,13 +32,6 @@ class NotesListFragment : Fragment() {
     private var adapter: NoteAdapter? = NoteAdapter(emptyList())
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        /*if (savedInstanceState != null) {
-            tracker?.onRestoreInstanceState(savedInstanceState)
-        }*/
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,13 +73,7 @@ class NotesListFragment : Fragment() {
         )
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
 
-        /*if(outState != null) {
-            tracker?.onSaveInstanceState(outState)
-        }*/
-    }
 
     private fun updateUI(notes: List<Note>) {
         adapter = NoteAdapter(notes)
@@ -106,17 +92,7 @@ class NotesListFragment : Fragment() {
             titleTextView.text = note.title
             textBodyView.text = note.body
         }
-        fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> = object:
-            ItemDetailsLookup.ItemDetails<Long>() {
-            override fun getPosition(): Int {
-                return adapterPosition
-            }
 
-            override fun getSelectionKey(): Long? {
-                return itemId
-            }
-
-        }
 
 
     }
@@ -208,17 +184,6 @@ class NotesListFragment : Fragment() {
 
 
     }
-    private inner class NoteDetailsLookup(private val recyclerView: RecyclerView):
-            ItemDetailsLookup<Long>() {
-        override fun getItemDetails(e: MotionEvent): ItemDetails<Long>? {
-            val view = recyclerView.findChildViewUnder(e.x, e.y)
 
-            if(view != null) {
-                return (recyclerView.getChildViewHolder(view) as NoteHolder).getItemDetails()
-            }
-            return null
-        }
-
-    }
 
 }
