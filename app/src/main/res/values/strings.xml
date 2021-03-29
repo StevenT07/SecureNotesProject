@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SecureNotesProject</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_body_hint">Type in your text here</string>
+    <string name="title_hint">Enter Title</string>
+    <string name="title_placeholder">Placeholder Title</string>
+    <string name="text_placeholder">Placeholder text that is really long oh lord its so long jesus christ its so long oh lord oh god </string>
+    <string name="delete_selected_notes">Delete selected notes</string>
+</resources>
