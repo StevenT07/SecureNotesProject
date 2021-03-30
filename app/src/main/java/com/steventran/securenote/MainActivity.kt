@@ -39,7 +39,10 @@ class MainActivity : AppCompatActivity(), NotesListFragment.Callback,
         }.build()
         val biometricManager = androidx.biometric.BiometricManager.from(this)
         when (biometricManager.canAuthenticate(BIOMETRIC_STRONG)) {
+            androidx.biometric.BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE
+                    or androidx.biometric.BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
 
+                    }
         }
         val executor = ContextCompat.getMainExecutor(this)
         val biometricPrompt = androidx.biometric.BiometricPrompt(this, executor,
@@ -47,15 +50,7 @@ class MainActivity : AppCompatActivity(), NotesListFragment.Callback,
                     override fun onAuthenticationSucceeded(result: androidx.biometric.BiometricPrompt.AuthenticationResult) {
                         super.onAuthenticationSucceeded(result)
                         Toast.makeText(applicationContext, "Authentication Succeeded.", Toast.LENGTH_SHORT).show()
-                        val currentFragment =
-                            supportFragmentManager.findFragmentById(R.id.fragment_container)
-
-                        if (currentFragment == null) {
-                            val fragment = NotesListFragment.newInstance()
-                            supportFragmentManager.beginTransaction()
-                                .add(R.id.fragment_container, fragment)
-                                .commit()
-                        }
+                        initializeNoteFragment()
                     }
                 })
         biometricPrompt.authenticate(promptInfo)
@@ -71,6 +66,18 @@ class MainActivity : AppCompatActivity(), NotesListFragment.Callback,
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    fun initializeNoteFragment() {
+        val currentFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container)
+
+        if (currentFragment == null) {
+            val fragment = NotesListFragment.newInstance()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, fragment)
+                .commit()
+        }
     }
 
 
