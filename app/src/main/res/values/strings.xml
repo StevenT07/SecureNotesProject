@@ -7,4 +7,5 @@
     <string name="title_placeholder">Placeholder Title</string>
     <string name="text_placeholder">Placeholder text that is really long oh lord its so long jesus christ its so long oh lord oh god </string>
     <string name="delete_selected_notes">Delete selected notes</string>
+    <string name="action_search_notes">Search Notes</string>
 </resources>
